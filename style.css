@@ -1,0 +1,18 @@
+body {
+  font-family: Arial;
+  background: #121212;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.container {
+  width: 300px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
