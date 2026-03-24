@@ -2,16 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Tracker</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
   <div class="container">
-    <h1>Task Tracker</h1>
-    <input type="text" id="taskInput" placeholder="Enter task">
-    <button onclick="addTask()">Add</button>
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo">&#10003;</div>
+        <div>
+          <h1>Task Tracker</h1>
+          <p class="subtitle">Stay productive, stay focused</p>
+        </div>
+      </div>
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-num" id="totalCount">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" id="doneCount">0</span>
+          <span class="stat-label">Done</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" id="pendingCount">0</span>
+          <span class="stat-label">Pending</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-label" id="progressLabel">0% complete</span>
+    </div>
+
+    <div class="input-card">
+      <div class="input-row">
+        <input type="text" id="taskInput" placeholder="What needs to be done?" autocomplete="off">
+        <button class="btn-add" onclick="addTask()">
+          <span>+</span> Add Task
+        </button>
+      </div>
+      <div class="meta-row">
+        <select id="prioritySelect">
+          <option value="low">&#128994; Low</option>
+          <option value="medium" selected>&#128992; Medium</option>
+          <option value="high">&#128308; High</option>
+        </select>
+        <select id="categorySelect">
+          <option value="general">&#128203; General</option>
+          <option value="work">&#128188; Work</option>
+          <option value="personal">&#127968; Personal</option>
+          <option value="health">&#129488; Health</option>
+          <option value="learning">&#128218; Learning</option>
+        </select>
+        <input type="date" id="dueDateInput" title="Due date">
+      </div>
+    </div>
+
+    <div class="controls-bar">
+      <div class="search-wrap">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="Search tasks..." oninput="renderTasks()">
+      </div>
+      <div class="filter-tabs">
+        <button class="tab active" onclick="setFilter('all', this)">All</button>
+        <button class="tab" onclick="setFilter('active', this)">Active</button>
+        <button class="tab" onclick="setFilter('completed', this)">Done</button>
+      </div>
+    </div>
+
+    <div class="sort-bar">
+      <span class="sort-label">Sort by:</span>
+      <button class="sort-btn active" onclick="setSort('date', this)">Date</button>
+      <button class="sort-btn" onclick="setSort('priority', this)">Priority</button>
+      <button class="sort-btn" onclick="setSort('name', this)">Name</button>
+      <button class="btn-clear-done" onclick="clearCompleted()">Clear Done</button>
+    </div>
+
     <ul id="taskList"></ul>
+
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">&#127775;</div>
+      <p>No tasks yet. Add one above!</p>
+    </div>
+
+    <footer class="app-footer">
+      <span>Task Tracker &mdash; Built with focus in mind</span>
+    </footer>
   </div>
 
   <script src="script.js"></script>
